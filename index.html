@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Levare Wellbeing — Health Intelligence, Built for the Workplace</title>
+<meta name="description" content="Levare is a single point of access for storing medical, fitness and nutrition data under the advice and guidance of an expert team. Powered by Rico AI.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #080f18;
+  --bg-card: #0f1e2d;
+  --bg-elevated: #142233;
+  --primary: #00AEEF;
+  --primary-dim: rgba(0,174,239,0.1);
+  --success: #00c896;
+  --warning: #f0a050;
+  --text: #e8f0f8;
+  --text-muted: #7a9ab8;
+  --text-faint: #3d5a72;
+  --border: rgba(0,174,239,0.15);
+  --border-subtle: rgba(255,255,255,0.06);
+  --radius: 4px;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: "DM Sans", sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 3rem;
+  background: rgba(8,15,24,0.9); backdrop-filter: blur(16px);
+  border-bottom: 0.5px solid var(--border-subtle);
+}
+.nav-logo { font-family: "Playfair Display", serif; font-size: 1.3rem; color: var(--text); text-decoration: none; }
+.nav-logo span { color: var(--primary); }
+.nav-links { display: flex; align-items: center; gap: 2rem; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { background: var(--primary); color: #080f18; font-family: "DM Sans", sans-serif; font-weight: 500; font-size: 0.82rem; letter-spacing: 0.05em; padding: 0.55rem 1.4rem; border-radius: var(--radius); border: none; cursor: pointer; text-decoration: none; transition: opacity 0.2s; }
+.nav-cta:hover { opacity: 0.85; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 10rem 3rem 6rem; position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(0,174,239,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,174,239,0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.hero-glow {
+  position: absolute; top: -300px; left: 50%; transform: translateX(-50%);
+  width: 1000px; height: 700px;
+  background: radial-gradient(ellipse at center, rgba(0,174,239,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 820px; text-align: center; position: relative; z-index: 1; }
+.beta-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--primary-dim); border: 0.5px solid var(--primary);
+  color: var(--primary); font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.4rem 1.1rem; border-radius: 100px; margin-bottom: 2.5rem;
+  animation: fadeUp 0.6s ease both;
+}
+.beta-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); animation: pulse 2s infinite; }
+h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  font-weight: 500; line-height: 1.1; color: var(--text);
+  margin-bottom: 1.75rem;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+h1 em { font-style: italic; color: var(--primary); }
+.hero-sub {
+  font-size: 1.05rem; color: var(--text-muted);
+  max-width: 560px; margin: 0 auto 1.25rem;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+.hero-sub-2 {
+  font-size: 0.92rem; color: var(--text-faint);
+  max-width: 480px; margin: 0 auto 3rem;
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+.hero-actions {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1rem; flex-wrap: wrap;
+  animation: fadeUp 0.7s 0.4s ease both;
+}
+.btn-primary {
+  background: var(--primary); color: #080f18;
+  font-family: "DM Sans", sans-serif; font-weight: 500; font-size: 0.9rem;
+  padding: 0.9rem 2.4rem; border-radius: var(--radius); border: none;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-secondary {
+  background: transparent; color: var(--text-muted);
+  font-family: "DM Sans", sans-serif; font-weight: 400; font-size: 0.9rem;
+  padding: 0.9rem 2.4rem; border-radius: var(--radius);
+  border: 0.5px solid var(--border-subtle);
+  cursor: pointer; text-decoration: none; display: inline-block;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+
+/* ── STATS STRIP ── */
+.stats-strip {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 0.5px solid var(--border-subtle);
+  border-bottom: 0.5px solid var(--border-subtle);
+  margin-top: 5rem;
+  animation: fadeUp 0.8s 0.5s ease both;
+}
+.stat-cell { padding: 2rem; text-align: center; border-right: 0.5px solid var(--border-subtle); }
+.stat-cell:last-child { border-right: none; }
+.stat-num { font-family: "Playfair Display", serif; font-size: 2.6rem; font-weight: 500; color: var(--primary); line-height: 1; margin-bottom: 0.4rem; }
+.stat-label { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ── SECTIONS ── */
+section { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
+.section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--primary); margin-bottom: 0.85rem; }
+h2 { font-family: "Playfair Display", serif; font-size: clamp(1.9rem, 3.5vw, 2.9rem); font-weight: 500; line-height: 1.15; color: var(--text); margin-bottom: 1.1rem; }
+h2 em { font-style: italic; color: var(--primary); }
+.section-body { font-size: 1rem; color: var(--text-muted); max-width: 560px; margin-bottom: 3rem; line-height: 1.8; }
+.divider { border: none; border-top: 0.5px solid var(--border-subtle); margin: 0; }
+
+/* ── HOW IT WORKS ── */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-subtle); border: 0.5px solid var(--border-subtle); }
+.step {
+  background: var(--bg); padding: 2.5rem;
+  position: relative; transition: background 0.2s;
+}
+.step:hover { background: var(--bg-card); }
+.step-num {
+  font-family: "Playfair Display", serif; font-size: 3.5rem;
+  font-weight: 500; color: rgba(0,174,239,0.12); line-height: 1;
+  margin-bottom: 1.5rem;
+}
+.step h3 { font-family: "Playfair Display", serif; font-size: 1.2rem; font-weight: 500; color: var(--text); margin-bottom: 0.75rem; }
+.step p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+
+/* ── FEATURES GRID ── */
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.feature-card {
+  background: var(--bg-card); border: 0.5px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 2rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.feature-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+.feature-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+.feature-card h3 { font-family: "Playfair Display", serif; font-size: 1.05rem; font-weight: 500; color: var(--text); margin-bottom: 0.6rem; }
+.feature-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+.feature-tag { display: inline-block; margin-top: 0.85rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary); }
+
+/* ── RICO SECTION ── */
+.rico-section {
+  background: var(--bg-card); border: 0.5px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 4rem; margin: 2rem 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+}
+.rico-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(0,174,239,0.08); border: 0.5px solid var(--border);
+  color: var(--primary); font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 1.5rem;
+}
+.rico-chat {
+  background: var(--bg-elevated); border: 0.5px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.msg { display: flex; gap: 0.75rem; align-items: flex-start; }
+.msg-rico { justify-content: flex-start; }
+.msg-user { justify-content: flex-end; }
+.msg-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(0,174,239,0.12); border: 0.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.6rem; font-weight: 600; color: var(--primary); flex-shrink: 0;
+}
+.msg-bubble {
+  max-width: 80%; padding: 0.75rem 1rem;
+  border-radius: var(--radius); font-size: 0.8rem; line-height: 1.6;
+}
+.msg-rico .msg-bubble { background: var(--bg-card); border: 0.5px solid var(--border-subtle); color: var(--text-muted); }
+.msg-user .msg-bubble { background: rgba(0,174,239,0.1); border: 0.5px solid var(--border); color: var(--text); }
+
+/* ── WHO IT'S FOR ── */
+.audience { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.audience-card {
+  background: var(--bg-card); border: 0.5px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 2.5rem; text-align: center;
+  transition: border-color 0.2s;
+}
+.audience-card:hover { border-color: var(--primary); }
+.audience-icon { font-size: 2.5rem; margin-bottom: 1.25rem; }
+.audience-card h3 { font-family: "Playfair Display", serif; font-size: 1.2rem; font-weight: 500; color: var(--text); margin-bottom: 0.75rem; }
+.audience-card p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.7; }
+.audience-list { list-style: none; margin-top: 1rem; text-align: left; }
+.audience-list li {
+  font-size: 0.8rem; color: var(--text-muted); padding: 0.4rem 0;
+  border-bottom: 0.5px solid var(--border-subtle);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.audience-list li::before { content: "→"; color: var(--primary); flex-shrink: 0; }
+
+/* ── BIOMARKERS ── */
+.biomarkers { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.bio-tag {
+  padding: 0.35rem 0.85rem;
+  background: var(--bg-card); border: 0.5px solid var(--border-subtle);
+  border-radius: 100px; font-size: 0.75rem; color: var(--text-muted);
+  transition: all 0.2s;
+}
+.bio-tag:hover { border-color: var(--primary); color: var(--primary); }
+.bio-tag.flagged { border-color: rgba(240,80,80,0.3); color: #f05050; background: rgba(240,80,80,0.06); }
+.bio-tag.good { border-color: rgba(0,200,150,0.3); color: var(--success); background: rgba(0,200,150,0.06); }
+
+/* ── PRICING ── */
+.pricing { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border-subtle); border: 0.5px solid var(--border-subtle); }
+.price-card { background: var(--bg); padding: 2.5rem; position: relative; transition: background 0.2s; }
+.price-card:hover { background: var(--bg-card); }
+.price-card.featured { background: var(--bg-card); }
+.price-card.featured::before { content: "Only Available"; position: absolute; top: -1px; left: 1.5rem; transform: none; background: var(--primary); color: #080f18; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.85rem; border-radius: 0 0 4px 4px; }
+.price-tier { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.25rem; }
+.price-amount { font-family: "Playfair Display", serif; font-size: 2.8rem; font-weight: 500; color: var(--text); line-height: 1; margin-bottom: 0.3rem; }
+.price-amount span { font-size: 1.1rem; color: var(--text-muted); }
+.price-sub { font-size: 0.75rem; color: var(--text-faint); margin-bottom: 1.5rem; }
+.price-feature { font-size: 0.8rem; color: var(--text-muted); padding: 0.4rem 0; border-bottom: 0.5px solid var(--border-subtle); display: flex; align-items: center; gap: 0.5rem; }
+.price-feature::before { content: "✓"; color: var(--success); font-weight: 600; flex-shrink: 0; }
+.price-cta { margin-top: 1.75rem; display: block; text-align: center; padding: 0.75rem; border-radius: var(--radius); font-family: "DM Sans", sans-serif; font-size: 0.82rem; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+.price-cta-outline { border: 0.5px solid var(--border-subtle); color: var(--text-muted); }
+.price-cta-outline:hover { border-color: var(--primary); color: var(--primary); }
+.price-cta-filled { background: var(--primary); color: #080f18; border: none; cursor: pointer; }
+.price-cta-filled:hover { opacity: 0.88; }
+
+/* ── BETA SECTION ── */
+.beta-section {
+  background: var(--bg-card); border: 0.5px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 5rem; text-align: center; margin: 2rem 0;
+  position: relative; overflow: hidden;
+}
+.beta-section::before {
+  content: ""; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse at center, rgba(0,174,239,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.beta-form { display: flex; gap: 0.75rem; max-width: 440px; margin: 2rem auto 0; flex-wrap: wrap; justify-content: center; }
+.beta-input {
+  flex: 1; min-width: 200px;
+  background: var(--bg-elevated); border: 0.5px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius); padding: 0.85rem 1.1rem;
+  color: var(--text); font-family: "DM Sans", sans-serif; font-size: 0.88rem;
+  outline: none; transition: border-color 0.2s;
+}
+.beta-input:focus { border-color: var(--primary); }
+.beta-input::placeholder { color: var(--text-faint); }
+.beta-note { font-size: 0.72rem; color: var(--text-faint); margin-top: 0.85rem; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 0.5px solid var(--border-subtle);
+  padding: 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-logo { font-family: "Playfair Display", serif; font-size: 1.1rem; color: var(--text); }
+.footer-logo span { color: var(--primary); }
+.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+.footer-links a { font-size: 0.78rem; color: var(--text-faint); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text-muted); }
+.footer-copy { font-size: 0.75rem; color: var(--text-faint); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { padding: 8rem 1.5rem 4rem; }
+  .stats-strip { grid-template-columns: repeat(2, 1fr); }
+  section { padding: 4rem 1.5rem; }
+  .steps { grid-template-columns: 1fr; }
+  .features { grid-template-columns: 1fr; }
+  .rico-section { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
+  .audience { grid-template-columns: 1fr; }
+  .pricing { grid-template-columns: repeat(2, 1fr); }
+  footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+}
+@media (max-width: 540px) {
+  .stats-strip { grid-template-columns: repeat(2, 1fr); }
+  .pricing { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Levare<span>.</span></a>
+  <div class="nav-links">
+    <a href="#how-it-works">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#beta">Get access</a>
+  </div>
+  <a href="#beta" class="nav-cta">Join Beta</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="beta-pill"><div class="beta-dot"></div>Now accepting beta partners</div>
+    <h1>Health intelligence,<br><em>built for the workplace.</em></h1>
+    <p class="hero-sub">A single point of access for your team's medical, fitness and nutrition data — under the guidance of Rico, your AI clinical advisor.</p>
+    <p class="hero-sub-2">Trusted by HR managers, used by employees, powered by evidence-based clinical intelligence.</p>
+    <div class="hero-actions">
+      <a href="#beta" class="btn-primary">Request Beta Access →</a>
+      <a href="#how-it-works" class="btn-secondary">See how it works</a>
+    </div>
+    <div class="stats-strip reveal">
+      <div class="stat-cell"><div class="stat-num">36</div><div class="stat-label">Biomarkers tracked</div></div>
+      <div class="stat-cell"><div class="stat-num">4</div><div class="stat-label">Rico AI advisors</div></div>
+      <div class="stat-cell"><div class="stat-num">100%</div><div class="stat-label">Data private</div></div>
+      <div class="stat-cell"><div class="stat-num">UK</div><div class="stat-label">GDPR compliant</div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <p class="section-label reveal">How it works</p>
+  <h2 class="reveal">From data to <em>genuine insight</em> in minutes</h2>
+  <p class="section-body reveal">Levare connects your health data — blood results, fitness, nutrition — into a single intelligent profile. Rico analyses everything and tells you what actually matters.</p>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Your company joins</h3>
+      <p>HR managers onboard their organisation in minutes. Employees receive a company code to register — no IT involvement required.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Employees build their profile</h3>
+      <p>Upload blood test results, log fitness data, set up nutrition targets. Rico reads the data and flags what matters — all in plain English.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Insights flow both ways</h3>
+      <p>Employees get personalised health guidance. HR gets anonymised team health intelligence — without ever seeing individual data.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FEATURES -->
+<section id="features">
+  <p class="section-label reveal">Platform features</p>
+  <h2 class="reveal">Everything in <em>one place</em></h2>
+  <p class="section-body reveal">Levare brings together blood health, training, nutrition and mental wellbeing — with Rico AI making sense of it all.</p>
+  <div class="features reveal">
+    <div class="feature-card">
+      <div class="feature-icon">🔬</div>
+      <h3>Blood Health Intelligence</h3>
+      <p>Upload any blood test — NHS or private. Rico extracts 36 biomarkers, flags anything outside optimal range, and explains what it means in plain English.</p>
+      <span class="feature-tag">36 biomarkers · PDF extraction · trend tracking</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏋️</div>
+      <h3>Personalised Training</h3>
+      <p>Rico PT builds a full 12-week programme based on your goals, experience and health data. Guided workouts, rest timers, PB detection and progressive overload built in.</p>
+      <span class="feature-tag">12-week programme · guided sessions · XP system</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🥗</div>
+      <h3>Nutrition Planning</h3>
+      <p>Personalised calorie and macro targets calculated from your health data. Rico Nutrition builds a 7-day meal plan with full recipes — tailored to your food preferences.</p>
+      <span class="feature-tag">7-day meal plan · food log · macro tracking</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <h3>Rico — Your AI Health Advisor</h3>
+      <p>Four specialist Rico advisors: health, training, nutrition and HR. Each one has full context across your data and gives specific, evidence-based advice. Not generic chatbot responses.</p>
+      <span class="feature-tag">Real Integrated Clinical Observations</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">👥</div>
+      <h3>HR Population Health</h3>
+      <p>HR managers see anonymised team health trends — glucose, blood pressure, stress, burnout, BMI. Clinical flags, risk distribution and intervention recommendations.</p>
+      <span class="feature-tag">Team dashboard · risk scoring · interventions</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🧠</div>
+      <h3>Mental Health Tracking</h3>
+      <p>Stress scores, burnout risk, PHQ-9 and GAD-7 assessments. Rico correlates mental health with physical markers — because they're inseparable.</p>
+      <span class="feature-tag">Stress · burnout · sleep · PHQ-9 · GAD-7</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- RICO SECTION -->
+<section>
+  <p class="section-label reveal">Meet Rico</p>
+  <h2 class="reveal">An advisor who actually <em>knows you</em></h2>
+  <div class="rico-section reveal">
+    <div>
+      <div class="rico-badge">🤖 Real Integrated Clinical Observations</div>
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:500; color:var(--text); margin-bottom:1rem; line-height:1.3;">Not a chatbot. A clinical advisor with full context.</h3>
+      <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.8; margin-bottom:1.5rem;">Rico has access to your blood markers, training history, nutrition data, food log and mental health scores — all at once. When you ask a question, it answers with your actual data, not generic advice.</p>
+      <ul style="list-style:none; display:flex; flex-direction:column; gap:0.6rem;">
+        <li style="font-size:0.82rem; color:var(--text-muted); display:flex; align-items:center; gap:0.6rem;"><span style="color:var(--primary);">→</span> Flags elevated glucose and recommends dietary changes based on your food log</li>
+        <li style="font-size:0.82rem; color:var(--text-muted); display:flex; align-items:center; gap:0.6rem;"><span style="color:var(--primary);">→</span> Adjusts training intensity based on recovery markers and sleep data</li>
+        <li style="font-size:0.82rem; color:var(--text-muted); display:flex; align-items:center; gap:0.6rem;"><span style="color:var(--primary);">→</span> Connects cholesterol results to dietary patterns and suggests targeted changes</li>
+        <li style="font-size:0.82rem; color:var(--text-muted); display:flex; align-items:center; gap:0.6rem;"><span style="color:var(--primary);">→</span> HR version analyses team trends and recommends specific interventions</li>
+      </ul>
+    </div>
+    <div class="rico-chat">
+      <div class="msg msg-user">
+        <div class="msg-bubble">How was my diet today?</div>
+      </div>
+      <div class="msg msg-rico">
+        <div class="msg-avatar">R</div>
+        <div class="msg-bubble">You've logged 1,840 kcal today — 631 short of your 2,471 kcal target. Protein is tracking well at 178g against your 238g goal, so you're about 60g short there. Given your training session this morning, I'd suggest a high-protein evening meal. Your glucose has been trending borderline recently — a lower-carb dinner tonight would be a good call.</div>
+      </div>
+      <div class="msg msg-user">
+        <div class="msg-bubble">What's my biggest health risk right now?</div>
+      </div>
+      <div class="msg msg-rico">
+        <div class="msg-avatar">R</div>
+        <div class="msg-bubble">Your fasting glucose of 6.1 mmol/L is borderline pre-diabetic. Combined with your average sleep of 6.2 hours and elevated CRP of 5.8 mg/L, there's a clear pattern — poor sleep drives cortisol, which raises glucose and inflammation. Prioritising sleep above 7 hours would likely move all three markers in the right direction within 8-12 weeks.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BIOMARKERS -->
+<section>
+  <p class="section-label reveal">What we track</p>
+  <h2 class="reveal">36 biomarkers across <em>8 categories</em></h2>
+  <p class="section-body reveal">Upload any blood test and Rico extracts the values automatically. Green means optimal. Red means it needs attention.</p>
+  <div class="biomarkers reveal">
+    <span class="bio-tag good">Fasting Glucose ✓</span>
+    <span class="bio-tag flagged">HbA1c ↑</span>
+    <span class="bio-tag good">Total Cholesterol ✓</span>
+    <span class="bio-tag flagged">LDL ↑</span>
+    <span class="bio-tag good">HDL ✓</span>
+    <span class="bio-tag">Triglycerides</span>
+    <span class="bio-tag flagged">Systolic BP ↑</span>
+    <span class="bio-tag good">Diastolic BP ✓</span>
+    <span class="bio-tag good">Vitamin D ✓</span>
+    <span class="bio-tag flagged">Vitamin B12 ↓</span>
+    <span class="bio-tag good">Ferritin ✓</span>
+    <span class="bio-tag">TSH</span>
+    <span class="bio-tag good">Free T4 ✓</span>
+    <span class="bio-tag flagged">CRP ↑</span>
+    <span class="bio-tag good">ALT ✓</span>
+    <span class="bio-tag good">AST ✓</span>
+    <span class="bio-tag">eGFR</span>
+    <span class="bio-tag good">Creatinine ✓</span>
+    <span class="bio-tag good">Haemoglobin ✓</span>
+    <span class="bio-tag">Platelets</span>
+    <span class="bio-tag flagged">Folate ↓</span>
+    <span class="bio-tag">Sodium</span>
+    <span class="bio-tag good">Potassium ✓</span>
+    <span class="bio-tag">Uric Acid</span>
+    <span class="bio-tag good">BMI ✓</span>
+    <span class="bio-tag">Waist Circumference</span>
+    <span class="bio-tag flagged">Stress Score ↑</span>
+    <span class="bio-tag">Burnout Score</span>
+    <span class="bio-tag good">Sleep Hours ✓</span>
+    <span class="bio-tag good">Steps/Day ✓</span>
+    <span class="bio-tag good">Resting HR ✓</span>
+    <span class="bio-tag">HRV</span>
+    <span class="bio-tag">VO₂ Max</span>
+    <span class="bio-tag good">PHQ-9 ✓</span>
+    <span class="bio-tag">GAD-7</span>
+    <span class="bio-tag">Non-HDL</span>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- WHO IT'S FOR -->
+<section>
+  <p class="section-label reveal">Who it's for</p>
+  <h2 class="reveal">Built for <em>everyone</em> in the organisation</h2>
+  <p class="section-body reveal">Levare works for individuals, HR teams and senior leadership — each with a tailored experience designed around their needs.</p>
+  <div class="audience reveal">
+    <div class="audience-card">
+      <div class="audience-icon">👤</div>
+      <h3>Employees</h3>
+      <p>Your health, in one place. Understand your blood results, build better habits, and get evidence-based advice without needing a GP appointment.</p>
+      <ul class="audience-list">
+        <li>Upload blood tests and get plain-English explanations</li>
+        <li>12-week personalised training programme</li>
+        <li>7-day meal plan with full recipes</li>
+        <li>Rico health advisor with full context</li>
+        <li>Gamified progress tracking</li>
+      </ul>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon">🏢</div>
+      <h3>HR Managers</h3>
+      <p>Population health data for your whole team — anonymised, aggregated, and actionable. Know where your team's health risks are before they become absences.</p>
+      <ul class="audience-list">
+        <li>Team health dashboard with risk scoring</li>
+        <li>Clinical flags across 36 biomarkers</li>
+        <li>Mental health and burnout trends</li>
+        <li>Rico HR advisor for intervention guidance</li>
+        <li>Individual data always protected</li>
+      </ul>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon">📊</div>
+      <h3>Leadership & Levare Admin</h3>
+      <p>Platform-wide visibility across all companies. Monitor adoption, track trends, manage interventions and understand the ROI of your wellbeing investment.</p>
+      <ul class="audience-list">
+        <li>Cross-company health intelligence</li>
+        <li>Platform engagement metrics</li>
+        <li>Fitness and nutrition trends</li>
+        <li>Company management and onboarding</li>
+        <li>Clinical flag escalation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PRICING -->
+<section id="pricing">
+  <p class="section-label reveal">Pricing</p>
+  <h2 class="reveal">Simple pricing, <em>no surprises</em></h2>
+  <p class="section-body reveal">All plans include every feature. Pricing scales with your team size — the more employees, the lower the cost per head.</p>
+  <div class="pricing reveal">
+    <div class="price-card featured" style="border-left: 2px solid var(--primary);">
+      <div class="price-tier" style="color:var(--primary);">Partner</div>
+      <div class="price-amount">£0<span>/mo</span></div>
+      <div class="price-sub">during the beta testing period</div>
+      <div class="price-feature">Full platform access</div>
+      <div class="price-feature">All Rico AI advisors</div>
+      <div class="price-feature">HR team dashboard</div>
+      <div class="price-feature">Direct product input</div>
+      <div class="price-feature" style="color:var(--primary); border-color:rgba(0,174,239,0.2);">£10/employee/month post-beta — locked in for life, regardless of team size</div>
+      <a href="#beta" class="price-cta price-cta-filled" style="background:var(--primary);">Apply to partner</a>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Starter</div>
+      <div class="price-amount">£15<span>/mo</span></div>
+      <div class="price-sub">per employee · up to 20 employees</div>
+      <div class="price-feature">Full employee health platform</div>
+      <div class="price-feature">HR team dashboard</div>
+      <div class="price-feature">Rico AI advisors (all 4)</div>
+      <div class="price-feature">Blood test PDF extraction</div>
+      <div class="price-feature">Training & nutrition modules</div>
+      <a href="#beta" class="price-cta price-cta-outline">Get started</a>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Growth</div>
+      <div class="price-amount">£14<span>/mo</span></div>
+      <div class="price-sub">per employee · 21–50 employees</div>
+      <div class="price-feature">Everything in Starter</div>
+      <div class="price-feature">Priority support</div>
+      <div class="price-feature">Onboarding assistance</div>
+      <div class="price-feature">Monthly health reports</div>
+      <div class="price-feature">Intervention booking</div>
+      <a href="#beta" class="price-cta price-cta-outline">Get started</a>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Scale</div>
+      <div class="price-amount">£13<span>/mo</span></div>
+      <div class="price-sub">per employee · 51–100 employees</div>
+      <div class="price-feature">Everything in Growth</div>
+      <div class="price-feature">Dedicated account manager</div>
+      <div class="price-feature">Custom health programmes</div>
+      <div class="price-feature">Quarterly clinical review</div>
+      <div class="price-feature">Dedicated clinical support</div>
+      <a href="#beta" class="price-cta price-cta-outline">Get started</a>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Enterprise</div>
+      <div class="price-amount">£11<span>/mo</span></div>
+      <div class="price-sub">per employee · 100+ employees</div>
+      <div class="price-feature">Everything in Scale</div>
+      <div class="price-feature">SLA guarantee</div>
+      <div class="price-feature">Custom integrations</div>
+      <div class="price-feature">On-site health days</div>
+      <div class="price-feature">White-label option</div>
+      <a href="#beta" class="price-cta price-cta-outline">Contact us</a>
+    </div>
+  </div>
+  <p style="text-align:center; font-size:0.78rem; color:var(--text-faint); margin-top:1.5rem;">All prices exclude VAT. Beta pricing — locked in for 12 months from sign-up date.</p>
+</section>
+
+<hr class="divider">
+
+<!-- BETA CTA -->
+<section id="beta">
+  <div class="beta-section reveal">
+    <p class="section-label" style="margin-bottom:0.5rem;">Beta access</p>
+    <h2 style="margin-bottom:0.75rem;">Join the <em>beta programme</em></h2>
+    <p style="font-size:0.95rem; color:var(--text-muted); max-width:480px; margin:0 auto 0.5rem; line-height:1.8;">We're onboarding a limited number of companies now. Beta partners get locked-in pricing, priority support and direct input on the product roadmap.</p>
+    <div class="beta-form">
+      <input type="email" class="beta-input" placeholder="Your work email" id="betaEmail">
+      <button class="btn-primary" onclick="handleBetaSignup()">Request Access →</button>
+    </div>
+    <p class="beta-note">Or email us directly at <a href="/cdn-cgi/l/email-protection#6605090812070512260a031007140311030a0a04030f08014805090b" style="color:var(--primary); text-decoration:none;"><span class="__cf_email__" data-cfemail="53303c3d27323027133f362532213624363f3f31363a3d347d303c3e">[email&#160;protected]</span></a></p>
+    <p class="beta-note" style="margin-top:0.4rem;">Already have a company code? <a href="https://app.levarewellbeing.com" style="color:var(--primary); text-decoration:none;">Sign in →</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Levare<span>.</span></div>
+  <div class="footer-links">
+    <a href="#how-it-works">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="https://app.levarewellbeing.com/#privacy">Privacy Policy</a>
+    <a href="https://app.levarewellbeing.com/#terms">Terms & Conditions</a>
+    <a href="/cdn-cgi/l/email-protection#21424e4f55404255614d445740534456444d4d4344484f460f424e4c">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Levare Wellbeing Ltd. Health intelligence, built for the workplace.</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 60);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+
+// Beta signup
+function handleBetaSignup() {
+  const email = document.getElementById('betaEmail').value;
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+  window.location.href = 'mailto:contact@levarewellbeing.com?subject=Beta Access Request&body=Hi, I would like to request beta a
