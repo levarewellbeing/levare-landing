@@ -538,6 +538,7 @@ footer {
         <li>Individual data always protected</li>
       </ul>
     </div>
+
   </div>
 </section>
 
@@ -557,7 +558,7 @@ footer {
       <div class="price-feature">All Rico AI advisors</div>
       <div class="price-feature">HR team dashboard</div>
       <div class="price-feature">Direct product input</div>
-      <div class="price-feature" style="color:var(--primary); border-color:rgba(0,174,239,0.2);">£10/employee/month post-beta — locked in for life, no matter team size</div>
+      <div class="price-feature" style="color:var(--primary); border-color:rgba(0,174,239,0.2);">After beta: locked-in at £10/employee/month for life</div>
       <a href="#beta" class="price-cta price-cta-filled">Apply to partner</a>
     </div>
     <div class="price-card">
@@ -620,7 +621,7 @@ footer {
       <input type="email" class="beta-input" placeholder="Your work email" id="betaEmail">
       <button class="btn-primary" onclick="handleBetaSignup()">Request Access →</button>
     </div>
-    <p class="beta-note">Or email us directly at <a href="/cdn-cgi/l/email-protection#0764686973666473476b627166756270626b6b65626e69602964686a" style="color:var(--primary); text-decoration:none;"><span class="__cf_email__" data-cfemail="4e2d21203a2f2d3a0e222b382f3c2b392b22222c2b272029602d2123">[email&#160;protected]</span></a></p>
+    <p class="beta-note">Or email us directly at <a href="mailto:contact[at]levarewellbeing[dot]com" style="color:var(--primary); text-decoration:none;">contact[at]levarewellbeing[dot]com</a></p>
     <p class="beta-note" style="margin-top:0.4rem;">Already have a company code? <a href="https://app.levarewellbeing.com" style="color:var(--primary); text-decoration:none;">Sign in →</a></p>
   </div>
 </section>
@@ -634,12 +635,12 @@ footer {
     <a href="#pricing">Pricing</a>
     <a href="https://app.levarewellbeing.com/#privacy">Privacy Policy</a>
     <a href="https://app.levarewellbeing.com/#terms">Terms & Conditions</a>
-    <a href="/cdn-cgi/l/email-protection#94f7fbfae0f5f7e0d4f8f1e2f5e6f1e3f1f8f8f6f1fdfaf3baf7fbf9">Contact</a>
+    <a href="mailto:contact[at]levarewellbeing[dot]com">Contact</a>
   </div>
   <div class="footer-copy">© 2026 Levare Wellbeing Ltd. Health intelligence, built for the workplace.</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // Scroll reveal
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
@@ -658,4 +659,15 @@ function handleBetaSignup() {
     alert('Please enter a valid email address.');
     return;
   }
-  window.location.href = 'mailto:contact@levarewellbeing.com?subject=Beta Access Request&body=Hi, I would like to request beta a
+  window.location.href = 'mailto:contact[at]levarewellbeing[dot]com?subject=Beta Access Request&body=Hi, I would like to request beta access for Levare. My email is: ' + email;
+}
+
+// Smooth nav on scroll
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 50) nav.style.background = 'rgba(8,15,24,0.95)';
+  else nav.style.background = 'rgba(8,15,24,0.9)';
+});
+</script>
+</body>
+</html>
